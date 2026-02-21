@@ -65,17 +65,22 @@ This system simulates an intelligent semantic navigation layer. Currently tested
                                |
                                v
                     Vision + Semantic Logic
-📂 Repository StructurePlaintextNo-GPS-UAV/
-│
-├── dead_reckoning.py        # Hardware flight logic
-│
-├── drone_brain_continuum.py # Semantic navigation logic
-├── teach_memory.py          # Training script
-│
-├── drone_memory.db          # (Auto-generated) Database
-├── memory_vectors/          # (Auto-generated) Embeddings folder
-│
-└── README.md
+                    
+---
+
+##📂 Repository StructurePlaintextNo-GPS-UAV/
+*│
+*├── dead_reckoning.py        # Hardware flight logic
+*│
+*├── drone_brain_continuum.py # Semantic navigation logic
+*├── teach_memory.py          # Training script
+*│
+*├── drone_memory.db          # (Auto-generated) Database
+*├── memory_vectors/          # (Auto-generated) Embeddings folder
+*│
+*└── README.md
+
+---
 
 ⚠️ IMPORTANT EXECUTION ORDER
 Step 1 — Teach Memory (RUN ONCE)
@@ -165,6 +170,7 @@ to trigger an immediate landing.
 🚧 Future Architecture (ROS Integration)
 
 The current system relies on standalone Python scripts.
+
 Future migration will introduce ROS2 Humble.
 
 Expected Changes
@@ -196,6 +202,9 @@ Google Drive: Link to Documentation
 
 Dead Reckoning: Tested on real drone hardware (Pixhawk / RPi5)
 
+Drone Brain Continuum: Tested ONLY with laptop webcam/simulation
+
+Hardware integration is pending
 Drone Brain Continuum: Tested ONLY with laptop webcam/simulation
 
 Hardware integration is still pending
