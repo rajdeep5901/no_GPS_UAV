@@ -1,88 +1,61 @@
 # No-GPS-UAV
-📌 Project Overview
-
+## 📌 Project Overview
 This repository contains research and development work for a GPS-denied autonomous UAV system.
-
 The project currently consists of two independent software tracks:
 
-🧩 1. Dead Reckoning Flight (REAL DRONE TESTED)
+---
 
-Demonstration of controlled flight without GPS using:
+## 🧩 1. Dead Reckoning Flight (REAL DRONE TESTED)
+**Demonstration of controlled flight without GPS.**
 
-PX4 hardware flight controller
-
-ArduPilot firmware (fmuv3-dev)
-
-Raspberry Pi 5 companion computer
-
-MAVLink communication via pymavlink
-
-Goal
-
+### Goal
 Prove that basic no-GPS flight is possible using:
+* IMU stabilization
+* Barometer altitude hold
+* RC override commands from companion computer
 
-IMU stabilization
+### Hardware Used
+* **Flight Controller:** Pixhawk / PX4 Hardware FC
+* **Firmware:** ArduPilot (fmuv3-dev)
+* **Companion Computer:** Raspberry Pi 5 (16GB)
+* **OS:** Ubuntu 24.04 LTS (Headless)
+* **Communication:** MAVLink via serial connection
 
-Barometer altitude hold
+### Calibration Completed
+* ✅ Accelerometer
+* ✅ Gyroscope
+* ✅ Radio calibration
 
-RC override commands from companion computer
-
-Hardware Used
-
-Pixhawk / PX4 Hardware FC
-
-ArduPilot firmware (fmuv3-dev)
-
-Raspberry Pi 5 (16GB)
-
-Ubuntu 24.04 LTS (Headless)
-
-MAVLink serial connection
-
-Calibration Completed
-
-Accelerometer
-
-Gyroscope
-
-Radio calibration
-
-Parameter Configuration
-
+### Parameter Configuration
 No-GPS parameters configured using:
+* **Mission Planner** (Preferred)
+* **QGroundControl** (Alternative)
 
-Mission Planner (Preferred)
+---
 
-QGroundControl (alternative)
+## 🧠 2. Drone Brain Continuum (LAPTOP TESTED)
+> **⚠️ WARNING:** Not yet tested on real drone hardware.
 
-🧠 2. Drone Brain Continuum (LAPTOP TESTED)
+This system simulates an intelligent semantic navigation layer. Currently tested using a laptop webcam in a local execution environment.
 
-⚠️ Not yet tested on real drone hardware.
+### Core Capabilities
+* Vision-language object understanding (Moondream2)
+* Semantic memory storage (SQLite)
+* Object prototype learning
+* 360° environment scan
+* Semantic navigation (e.g., "go to chair")
+* Visual return-to-home logic
 
-This system simulates an intelligent semantic navigation layer.
+---
 
-Tested using:
+## 🧠 Software Architecture
 
-Laptop camera (webcam)
-
-Local execution environment
-
-Core Capabilities
-
-Vision-language object understanding (Moondream2)
-
-Semantic memory storage (SQLite)
-
-Object prototype learning
-
-360° environment scan
-
-Semantic navigation ("go to chair")
-
-Visual return-to-home logic
-
-🧠 Software Architecture
-                    +---------------------+
+```mermaid
+graph TD;
+    A[Memory Teacher<br>teach_memory.py] -->|Generates| B(SQLite + Embedding Vectors);
+    B --> C[Drone Brain Continuum<br>drone_brain_continuum.py];
+    C --> D[Vision + Semantic Logic];
+Note: If the diagram above does not render, see the text representation below:Plaintext                    +---------------------+
                     |   Memory Teacher    |
                     |  (teach_memory.py)  |
                     +----------+----------+
@@ -98,158 +71,32 @@ Visual return-to-home logic
                                |
                                v
                     Vision + Semantic Logic
-📂 Repository Structure
-No-GPS-UAV/
+📂 Repository StructurePlaintextNo-GPS-UAV/
 │
-├── dead_reckoning.py
+├── dead_reckoning.py        # Hardware flight logic
 │
-├── drone_brain_continuum.py
-├── teach_memory.py
+├── drone_brain_continuum.py # Semantic navigation logic
+├── teach_memory.py          # Training script
 │
-├── drone_memory.db          (auto generated)
-├── memory_vectors/          (auto generated)
+├── drone_memory.db          # (Auto-generated) Database
+├── memory_vectors/          # (Auto-generated) Embeddings folder
 │
 └── README.md
-⚠️ IMPORTANT EXECUTION ORDER
-Step 1 — Teach Memory (RUN ONCE)
-python teach_memory.py
-
-This will:
-
-Create SQLite database
-
-Generate object prototype embeddings
-
-Create:
-
-drone_memory.db
-memory_vectors/
-Step 2 — Run Drone Brain
-python drone_brain_continuum.py
-
-This uses previously learned memory.
-
-After initial training:
-
-❌ Do NOT run teach_memory repeatedly
-✔ Run only drone_brain_continuum.py
-
-💾 Auto-Generated Files
-
-When running semantic memory system:
-
-Database
-drone_memory.db
-
-Stores:
-
-Objects
-
-Prototypes
-
-Events
-
-Embedding Vectors
-memory_vectors/*.npy
-
-Contains learned visual embeddings.
-
-💻 Laptop Setup (Semantic Memory System)
-Required Python Version
-Python 3.10+
-Install Dependencies
-pip install torch torchvision
+⚠️ IMPORTANT EXECUTION ORDERStep 1 — Teach Memory (RUN ONCE)You must run this first to generate the necessary database and vector files.Bashpython teach_memory.py
+This will:Create SQLite database (drone_memory.db)Generate object prototype embeddings (memory_vectors/)Step 2 — Run Drone BrainOnce the memory is generated, you can run the main brain script.Bashpython drone_brain_continuum.py
+❌ NOTE: Do NOT run teach_memory.py repeatedly after the initial training unless you want to reset/update the memory.💾 Auto-Generated FilesWhen running the semantic memory system, the following files are created:drone_memory.db: Stores objects, prototypes, and event logs.memory_vectors/*.npy: Contains learned visual embeddings.🛠️ Setup & Installation💻 Laptop Setup (Semantic Memory System)Required Python Version: Python 3.10+Install Dependencies:Bashpip install torch torchvision
 pip install transformers
 pip install opencv-python
 pip install pillow
 pip install numpy
-🍓 Raspberry Pi Setup (Dead Reckoning)
-OS
-Ubuntu 24.04 LTS (Headless)
-Install MAVLink Dependencies
-sudo apt update
+🍓 Raspberry Pi Setup (Dead Reckoning)OS: Ubuntu 24.04 LTS (Headless)Install MAVLink Dependencies:Bashsudo apt update
 sudo apt install python3-pip
 pip install pymavlink
-🔗 MAVLink Connection
-
-Serial connection:
-
-/dev/ttyAMA0
-baud = 57600
-✈️ Dead Reckoning Flight Logic
-
-Sequence:
-
-Connect to FC
-
-Wait for heartbeat
-
-Set ALT_HOLD mode
-
-Arm drone
-
-Takeoff using RC override
-
-Forward motion (dead reckoning)
-
-Hover
-
-LAND mode
-
-Emergency landing:
-
-Press l + ENTER
-🚧 Future Architecture (ROS Integration)
-
-Current system is non-ROS, but future migration will introduce ROS2.
-
-Expected Changes
-Current
-Python scripts directly controlling logic
-Future (ROS)
-ROS2 Nodes:
-
-vision_node
-semantic_memory_node
-navigation_node
-flight_interface_node
-Benefits
-
-Sensor synchronization
-
-Modular pipeline
-
-VIO integration
-
-Real-time communication
-
-Easier scaling
-
-Planned Flow
-Camera → ROS Vision Node
+🔗 MAVLink Connection Settings:Port: /dev/ttyAMA0Baud Rate: 57600✈️ Dead Reckoning Flight LogicThe dead_reckoning.py script executes the following sequence:Connect to FCWait for heartbeatSet ALT_HOLD modeArm droneTakeoff using RC overrideForward motion (dead reckoning)HoverSwitch to LAND mode🚨 Emergency Landing Trigger:Press l + ENTER on the keyboard to trigger an immediate landing.🚧 Future Architecture (ROS Integration)The current system relies on standalone Python scripts. Future migration will introduce ROS2 Humble.Expected ChangesFeatureCurrent (Python Scripts)Future (ROS2)Control LogicDirect script executionDistributed ROS2 NodesCommunicationSerial / PymavlinkMicro-XRCE-DDS / MAVROSVisionOpenCV Loopvision_nodeNavigationHardcoded logicnavigation_nodePlanned FlowPlaintextCamera → ROS Vision Node
        → Semantic Memory Node
        → Navigation Planner
        → MAVROS → Flight Controller
-🎯 Upcoming Integration
-
-Visual-Inertial Odometry (VIO)
-
-Real drone semantic navigation
-
-ROS2 migration
-
-Onboard AI acceleration
-
-📄 Documentation
-
-Detailed documentation, research logs, and system design diagrams are provided here:
-
-Google Drive:
-<ADD_LINK_HERE>
-⚠️ Disclaimer
-
-Dead Reckoning tested on real drone hardware.
-
+🎯 Upcoming IntegrationVisual-Inertial Odometry (VIO)Real drone semantic navigationOnboard AI acceleration📄 DocumentationDetailed documentation, research logs, and system design diagrams are available in the project drive.Google Drive: Link to Documentation⚠️ DisclaimerDead Reckoning: Tested on real drone hardware (Pixhawk/RPi5).Drone Brain Continuum: Tested ONLY with laptop webcam/simulation. Hardware integration is pending.
 Drone Brain Continuum tested only with laptop webcam.
 
 Hardware integration pending.
