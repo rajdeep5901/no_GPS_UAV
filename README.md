@@ -49,13 +49,7 @@ This system simulates an intelligent semantic navigation layer. Currently tested
 ---
 
 ## 🧠 Software Architecture
-
-```mermaid
-graph TD;
-    A[Memory Teacher<br>teach_memory.py] -->|Generates| B(SQLite + Embedding Vectors);
-    B --> C[Drone Brain Continuum<br>drone_brain_continuum.py];
-    C --> D[Vision + Semantic Logic];
-Note: If the diagram above does not render, see the text representation below:Plaintext                    +---------------------+
+                    +---------------------+
                     |   Memory Teacher    |
                     |  (teach_memory.py)  |
                     +----------+----------+
