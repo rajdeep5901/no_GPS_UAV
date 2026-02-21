@@ -76,21 +76,126 @@ This system simulates an intelligent semantic navigation layer. Currently tested
 ├── memory_vectors/          # (Auto-generated) Embeddings folder
 │
 └── README.md
-⚠️ IMPORTANT EXECUTION ORDERStep 1 — Teach Memory (RUN ONCE)You must run this first to generate the necessary database and vector files.Bashpython teach_memory.py
-This will:Create SQLite database (drone_memory.db)Generate object prototype embeddings (memory_vectors/)Step 2 — Run Drone BrainOnce the memory is generated, you can run the main brain script.Bashpython drone_brain_continuum.py
-❌ NOTE: Do NOT run teach_memory.py repeatedly after the initial training unless you want to reset/update the memory.💾 Auto-Generated FilesWhen running the semantic memory system, the following files are created:drone_memory.db: Stores objects, prototypes, and event logs.memory_vectors/*.npy: Contains learned visual embeddings.🛠️ Setup & Installation💻 Laptop Setup (Semantic Memory System)Required Python Version: Python 3.10+Install Dependencies:Bashpip install torch torchvision
+
+⚠️ IMPORTANT EXECUTION ORDER
+Step 1 — Teach Memory (RUN ONCE)
+
+You must run this first to generate the necessary database and vector files.
+
+python teach_memory.py
+
+This will:
+
+Create SQLite database (drone_memory.db)
+
+Generate object prototype embeddings (memory_vectors/)
+
+Step 2 — Run Drone Brain
+
+Once the memory is generated, you can run the main brain script.
+
+python drone_brain_continuum.py
+
+❌ NOTE:
+Do NOT run teach_memory.py repeatedly after the initial training unless you want to reset or update the memory.
+
+💾 Auto-Generated Files
+
+When running the semantic memory system, the following files are created:
+
+drone_memory.db — Stores objects, prototypes, and event logs
+
+memory_vectors/*.npy — Contains learned visual embeddings
+
+🛠️ Setup & Installation
+💻 Laptop Setup (Semantic Memory System)
+
+Required Python Version: Python 3.10+
+
+Install dependencies:
+
+pip install torch torchvision
 pip install transformers
 pip install opencv-python
 pip install pillow
 pip install numpy
-🍓 Raspberry Pi Setup (Dead Reckoning)OS: Ubuntu 24.04 LTS (Headless)Install MAVLink Dependencies:Bashsudo apt update
+🍓 Raspberry Pi Setup (Dead Reckoning)
+
+OS: Ubuntu 24.04 LTS (Headless)
+
+Install MAVLink dependencies:
+
+sudo apt update
 sudo apt install python3-pip
 pip install pymavlink
-🔗 MAVLink Connection Settings:Port: /dev/ttyAMA0Baud Rate: 57600✈️ Dead Reckoning Flight LogicThe dead_reckoning.py script executes the following sequence:Connect to FCWait for heartbeatSet ALT_HOLD modeArm droneTakeoff using RC overrideForward motion (dead reckoning)HoverSwitch to LAND mode🚨 Emergency Landing Trigger:Press l + ENTER on the keyboard to trigger an immediate landing.🚧 Future Architecture (ROS Integration)The current system relies on standalone Python scripts. Future migration will introduce ROS2 Humble.Expected ChangesFeatureCurrent (Python Scripts)Future (ROS2)Control LogicDirect script executionDistributed ROS2 NodesCommunicationSerial / PymavlinkMicro-XRCE-DDS / MAVROSVisionOpenCV Loopvision_nodeNavigationHardcoded logicnavigation_nodePlanned FlowPlaintextCamera → ROS Vision Node
+🔗 MAVLink Connection Settings
+
+Port: /dev/ttyAMA0
+
+Baud Rate: 57600
+
+✈️ Dead Reckoning Flight Logic
+
+The dead_reckoning.py script executes the following sequence:
+
+Connect to Flight Controller
+
+Wait for heartbeat
+
+Set ALT_HOLD mode
+
+Arm drone
+
+Takeoff using RC override
+
+Forward motion (dead reckoning)
+
+Hover
+
+Switch to LAND mode
+
+🚨 Emergency Landing Trigger
+
+Press:
+
+l + ENTER
+
+to trigger an immediate landing.
+
+🚧 Future Architecture (ROS Integration)
+
+The current system relies on standalone Python scripts.
+Future migration will introduce ROS2 Humble.
+
+Expected Changes
+Feature	Current (Python Scripts)	Future (ROS2)
+Control Logic	Direct script execution	Distributed ROS2 Nodes
+Communication	Serial / Pymavlink	Micro-XRCE-DDS / MAVROS
+Vision	OpenCV Loop	vision_node
+Navigation	Hardcoded logic	navigation_node
+Planned Flow
+Camera → ROS Vision Node
        → Semantic Memory Node
        → Navigation Planner
        → MAVROS → Flight Controller
-🎯 Upcoming IntegrationVisual-Inertial Odometry (VIO)Real drone semantic navigationOnboard AI acceleration📄 DocumentationDetailed documentation, research logs, and system design diagrams are available in the project drive.Google Drive: Link to Documentation⚠️ DisclaimerDead Reckoning: Tested on real drone hardware (Pixhawk/RPi5).Drone Brain Continuum: Tested ONLY with laptop webcam/simulation. Hardware integration is pending.
-Drone Brain Continuum tested only with laptop webcam.
+🎯 Upcoming Integration
 
-Hardware integration pending.
+Visual-Inertial Odometry (VIO)
+
+Real drone semantic navigation
+
+Onboard AI acceleration
+
+📄 Documentation
+
+Detailed documentation, research logs, and system design diagrams are available in the project drive.
+
+Google Drive: Link to Documentation
+
+⚠️ Disclaimer
+
+Dead Reckoning: Tested on real drone hardware (Pixhawk / RPi5)
+
+Drone Brain Continuum: Tested ONLY with laptop webcam/simulation
+
+Hardware integration is still pending
