@@ -5,7 +5,7 @@
 ![Hardware Tested](https://img.shields.io/badge/Hardware-Tested-green)
 ![ROS2](https://img.shields.io/badge/Future-ROS2-orange)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
-![WhatsApp Image 2026-03-29 at 23 07 37](https://github.com/user-attachments/assets/6716051c-2ba0-44ca-9343-b248fd413209)
+<img src="https://github.com/user-attachments/assets/6716051c-2ba0-44ca-9343-b248fd413209" width="600"/>
 
 ---
 
