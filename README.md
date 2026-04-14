@@ -1,446 +1,142 @@
-No-GPS-UAV
+# 🚁 No-GPS-UAV  
+### Autonomous UAV Navigation in GPS-Denied Environments  
 
-📌 Project Overview
+![Status](https://img.shields.io/badge/Status-Active%20Development-blue)
+![Hardware Tested](https://img.shields.io/badge/Hardware-Tested-green)
+![ROS2](https://img.shields.io/badge/Future-ROS2-orange)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
+---
 
+## 🌍 Overview
 
-This repository contains research and development work for a GPS-denied autonomous UAV system.
+**No-GPS-UAV** is a research-driven project focused on building a fully autonomous UAV capable of operating in **GPS-denied environments**.
 
+It combines:
+- ✈️ **Dead Reckoning Flight Control** (real hardware tested)  
+- 🧠 **Semantic AI Navigation System** (vision + memory driven)  
 
+> 🎯 Goal: Enable drones to navigate using **perception + reasoning**, not GPS.
 
-The project currently consists of two independent software tracks.
+---
 
+## ⚡ Key Highlights
 
+- 🚁 Real drone flight without GPS (Pixhawk + RPi5)
+- 🧠 Vision-Language Model integration (Moondream2)
+- 🗂️ Persistent semantic memory (SQLite + embeddings)
+- 🔁 Object-based navigation ("go to chair")
+- 🧭 Return-to-home via visual reasoning
+- 🔌 MAVLink-based control pipeline
+- 🚀 Future-ready for ROS2 + VIO integration
 
-🧩 1. Dead Reckoning Flight (REAL DRONE TESTED)
+---
 
+## 🧩 System Modules
 
+### 1️⃣ Dead Reckoning Flight *(Hardware Tested)*
 
-Demonstration of controlled flight without GPS.
+- IMU-based stabilization  
+- Barometer altitude hold  
+- MAVLink RC override control  
+- Fully executed on real drone  
 
+---
 
+### 2️⃣ Drone Brain Continuum *(AI Layer)*
 
-Goal
+⚠️ Currently tested on laptop (webcam simulation)
 
+- Vision-language understanding  
+- Semantic memory formation  
+- Object prototype learning  
+- Navigation via natural concepts  
 
+---
 
-Prove that basic no-GPS flight is possible using:
+## 🧠 System Architecture
 
 
+---
 
-IMU stabilization
+## 🚀 Quick Start
+### 1️⃣ Train Semantic Memory (Run Once)
+- python teach_memory.py
+  Generates:
+  - drone_memory.db
+  - memory_vectors/
 
+### 2️⃣ Run AI Navigation
+- python drone_brain_continuum.py
 
+---
 
-Barometer altitude hold
+## 🛠️ Setup
+### 💻 AI System (Laptop)
+  - pip install torch torchvision transformers opencv-python
+  - pillow numpy
 
+### 🍓 Flight System (Raspberry Pi)
+  - sudo apt update
+  - sudo apt install python3-pip
+  - pip install pymavlink
 
+### 🔗 MAVLink Configuration
+  - Port: /dev/ttyAMA0
+  - Baud Rate: 57600
 
-RC override commands from companion computer
+### ✈️ Flight Execution Pipeline
+  🚨 Emergency Stop
+  - Press:
+    - l + ENTER
 
+---
 
+## 🔮 Future Roadmap
+  - Visual-Inertial Odometry (VIO)
+  - Full onboard AI inference
+  - Real-world semantic navigation
+  - ROS2-based modular system
+  - Multi-object reasoning & planning
 
-Hardware Used
+---
 
+## 🧭 Future Architecture (ROS2)
+### 📊 Tech Stack
+  - Flight Control: Pixhawk / ArduPilot
+  - Companion Compute: Raspberry Pi 5 + AI hat
+  - AI Models: Moondream2, Transformers
+  - Vision: OpenCV
+  - Memory: SQLite + Embeddings
+  - Comm Protocol: MAVLink
+  - Future: ROS2 Humble
 
+---
 
-Flight Controller: Pixhawk / PX4 Hardware FC
+## 📄 Documentation
+  📁 Project Drive: https://drive.google.com/drive/folders/1fiI5WlGwTdZvgnb4nc8yaLPC7RyI-fD6
 
+---
 
+## ⚠️ Disclaimer
+  - ✅ Dead Reckoning → Tested on real drone
+  - ⚠️ AI Navigation → Simulation only
+  Hardware-AI integration is currently in progress.
 
-Firmware: ArduPilot (fmuv3-dev)
+---
 
+## 🤝 Contributing
+  - This is an evolving research project. Contributions, ideas, and collaborations are welcome.
 
+---
 
-Companion Computer: Raspberry Pi 5 (16GB)
+## ⭐ Support
+  - If you find this project interesting:
 
+    - 👉 Star the repo
+    - 👉 Share with others in robotics / AI
 
+---
 
-OS: Ubuntu 24.04 LTS (Headless)
-
-
-
-Communication: MAVLink via serial connection
-
-
-
-Calibration Completed
-
-
-
-✅ Accelerometer
-
-
-
-✅ Gyroscope
-
-
-
-✅ Radio calibration
-
-
-
-Parameter Configuration
-
-
-
-No-GPS parameters configured using:
-
-
-
-Mission Planner (Preferred)
-
-
-
-QGroundControl (Alternative)
-
-
-
-🧠 2. Drone Brain Continuum (LAPTOP TESTED)
-
-
-
-⚠️ WARNING: Not yet tested on real drone hardware.
-
-
-
-This system simulates an intelligent semantic navigation layer.
-
-
-
-Currently tested using a laptop webcam in a local execution environment.
-
-
-
-Core Capabilities
-
-
-
-Vision-language object understanding (Moondream2)
-
-
-
-Semantic memory storage (SQLite)
-
-
-
-Object prototype learning
-
-
-
-360° environment scan
-
-
-
-Semantic navigation (e.g., "go to chair")
-
-
-
-Visual return-to-home logic
-
-
-
-🧠 Software Architecture
-
-&nbsp;                   +---------------------+
-
-&nbsp;                   |   Memory Teacher    |
-
-&nbsp;                   |  (teach\_memory.py)  |
-
-&nbsp;                   +----------+----------+
-
-&nbsp;                              |
-
-&nbsp;                              v
-
-&nbsp;                   SQLite + Embedding Vectors
-
-&nbsp;                              |
-
-&nbsp;                              v
-
-&nbsp;                   +----------------------+
-
-&nbsp;                   | Drone Brain Continuum|
-
-&nbsp;                   | drone\_brain\_continuum|
-
-&nbsp;                   +----------------------+
-
-&nbsp;                              |
-
-&nbsp;                              v
-
-&nbsp;                   Vision + Semantic Logic
-
-📂 Repository Structure
-
-No-GPS-UAV/
-
-│
-
-├── dead\_reckoning.py        # Hardware flight logic
-
-│
-
-├── drone\_brain\_continuum.py # Semantic navigation logic
-
-├── teach\_memory.py          # Training script
-
-│
-
-├── drone\_memory.db          # (Auto-generated) Database
-
-├── memory\_vectors/          # (Auto-generated) Embeddings folder
-
-│
-
-└── README.md
-
-⚠️ IMPORTANT EXECUTION ORDER
-
-Step 1 — Teach Memory (RUN ONCE)
-
-
-
-You must run this first to generate the necessary database and vector files.
-
-
-
-python teach\_memory.py
-
-
-
-This will:
-
-
-
-Create SQLite database (drone\_memory.db)
-
-
-
-Generate object prototype embeddings (memory\_vectors/)
-
-
-
-Step 2 — Run Drone Brain
-
-
-
-Once the memory is generated, run the main brain script.
-
-
-
-python drone\_brain\_continuum.py
-
-
-
-❌ Note:
-
-Do NOT run teach\_memory.py repeatedly after the initial training unless you want to reset or update memory.
-
-
-
-💾 Auto-Generated Files
-
-
-
-When running the semantic memory system, the following files are created:
-
-
-
-drone\_memory.db → Stores objects, prototypes, and event logs
-
-
-
-memory\_vectors/\*.npy → Contains learned visual embeddings
-
-
-
-🛠️ Setup \& Installation
-
-💻 Laptop Setup (Semantic Memory System)
-
-
-
-Required Python Version: Python 3.10+
-
-
-
-Install dependencies:
-
-
-
-pip install torch torchvision
-
-pip install transformers
-
-pip install opencv-python
-
-pip install pillow
-
-pip install numpy
-
-🍓 Raspberry Pi Setup (Dead Reckoning)
-
-
-
-OS: Ubuntu 24.04 LTS (Headless)
-
-
-
-Install MAVLink dependencies:
-
-
-
-sudo apt update
-
-sudo apt install python3-pip
-
-pip install pymavlink
-
-🔗 MAVLink Connection Settings
-
-
-
-Port: /dev/ttyAMA0
-
-
-
-Baud Rate: 57600
-
-
-
-✈️ Dead Reckoning Flight Logic
-
-
-
-The dead\_reckoning.py script executes the following sequence:
-
-
-
-Connect to Flight Controller
-
-
-
-Wait for heartbeat
-
-
-
-Set ALT\_HOLD mode
-
-
-
-Arm drone
-
-
-
-Takeoff using RC override
-
-
-
-Forward motion (dead reckoning)
-
-
-
-Hover
-
-
-
-Switch to LAND mode
-
-
-
-🚨 Emergency Landing Trigger
-
-
-
-Press:
-
-
-
-l + ENTER
-
-
-
-to trigger an immediate landing.
-
-
-
-🚧 Future Architecture (ROS Integration)
-
-
-
-The current system relies on standalone Python scripts.
-
-
-
-Future migration will introduce ROS2 Humble.
-
-
-
-Expected Changes
-
-Feature	Current (Python Scripts)	Future (ROS2)
-
-Control Logic	Direct script execution	Distributed ROS2 nodes
-
-Communication	Serial / Pymavlink	Micro-XRCE-DDS / MAVROS
-
-Vision	OpenCV loop	vision\_node
-
-Navigation	Hardcoded logic	navigation\_node
-
-Planned Flow
-
-Camera → ROS Vision Node
-
-&nbsp;      → Semantic Memory Node
-
-&nbsp;      → Navigation Planner
-
-&nbsp;      → MAVROS → Flight Controller
-
-🎯 Upcoming Integration
-
-
-
-Visual-Inertial Odometry (VIO)
-
-
-
-Real drone semantic navigation
-
-
-
-Onboard AI acceleration
-
-
-
-📄 Documentation
-
-
-
-Detailed documentation, research logs, and system design diagrams are available in the project drive.
-
-
-
-Google Drive: [Link to Documentation](https://drive.google.com/drive/folders/1fiI5WlGwTdZvgnb4nc8yaLPC7RyI-fD6)
-
-
-
-⚠️ Disclaimer
-
-
-
-Dead Reckoning: Tested on real drone hardware (Pixhawk / RPi5)
-
-
-
-Drone Brain Continuum: Tested only with laptop webcam / simulation
-
-
-
-Hardware integration is still pending.
-
+## 📜 License
+  - MIT License
