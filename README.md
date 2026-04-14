@@ -56,6 +56,7 @@ It combines:
 
 ## 🧠 System Architecture
 
+<img width="2244" height="130" alt="mermaid-diagram" src="https://github.com/user-attachments/assets/19ec5d8b-533e-4018-97dc-8a8ea4edc7db" />
 
 ---
 
